@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--  -->
+	<bean id="lifecycleListener" class="org.apache.struts2.osgi.virgo.internal.deployer.StrutsLifecycleListener">
+		<constructor-arg ref="webBundleClassLoaderFactory"/>
+		<constructor-arg ref="eventLogger"/>
+	</bean>
+	
+	<bean id="transformer" class="org.apache.struts2.osgi.virgo.internal.deployer.StrutsVirgoTransformer">
+		<constructor-arg ref="webBundleManifestTransformer"/>
+	</bean>
+		
+
+	<bean id="strutsFactoryMonitor" class="org.apache.struts2.osgi.virgo.internal.StrutsFactoryMonitor" init-method="start" destroy-method="stop">
+		<constructor-arg ref="bundleContext"/>
+		<constructor-arg ref="eventLogger"/>
+	</bean>
+
+</beans>
